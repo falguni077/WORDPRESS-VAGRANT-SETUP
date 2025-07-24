@@ -97,16 +97,18 @@ Vagrant.configure("2") do |config|
     </Directory>
 </VirtualHost>
 EOF
-
+## Enable the WordPress site and rewrite module
   sudo a2ensite wordpress
   sudo a2enmod rewrite
   sudo a2dissite 000-default
 
+## Configure MySQL
   sudo mysql -u root -e 'CREATE DATABASE wordpress;'
   sudo mysql -u root -e 'CREATE USER wordpress@localhost IDENTIFIED BY "admin123";'
   sudo mysql -u root -e 'GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,INDEX,ALTER ON wordpress.* TO "wordpress"@"localhost";'
   sudo mysql -u root -e 'FLUSH PRIVILEGES;'
-
+  
+## Configure WordPress
   sudo -u www-data cp /srv/www/wordpress/wp-config-sample.php /srv/www/wordpress/wp-config.php
   sudo -u www-data sed -i 's/database_name_here/wordpress/' /srv/www/wordpress/wp-config.php
   sudo -u www-data sed -i 's/username_here/wordpress/' /srv/www/wordpress/wp-config.php
@@ -114,5 +116,6 @@ EOF
 
   systemctl restart mysql
   systemctl restart apache2
+
    SHELL
   end
