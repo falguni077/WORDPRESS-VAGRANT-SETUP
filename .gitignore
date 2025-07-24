@@ -1,0 +1,23 @@
+.vagrant/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# System files (macOS)
+.DS_Store
+
+# Backup files
+*~
+
+# SSH keys (if you ever generate them inside project)
+*.pem
+*.pub
+
+# IDE/editor specific files
+.vscode/
+.idea/
+
+# Environment variables or secrets (if used)
+.env
